@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
+import org.springframework.http.HttpHeaders;
 
 @Component
 public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
@@ -44,7 +45,8 @@ public class CustomJwtAuthenticationFilter extends OncePerRequestFilter {
                 // that the current user is authenticated. So it passes the
                 // Spring Security Configurations successfully.
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-                request.setAttribute("newToken", newToken);
+//                request.setAttribute("newToken", newToken);
+                 response.setHeader(HttpHeaders.AUTHORIZATION, ("Bearer " + newToken));
             } else {
                 System.out.println("Cannot set the Security Context!");
             }

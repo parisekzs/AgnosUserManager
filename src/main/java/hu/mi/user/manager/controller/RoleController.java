@@ -13,6 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.Optional;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +44,7 @@ public class RoleController {
     }
 
     @GetMapping("/role/{name}")
-    ResponseEntity<?> getRole(@PathVariable String name) {
+    ResponseEntity<?> getRole( @PathVariable String name) {
         Optional<RoleDTO> role = RoleConverter.dao2dto(roleRepo.findById(name));
         return role.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
