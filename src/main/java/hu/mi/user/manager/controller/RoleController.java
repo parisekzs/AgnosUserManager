@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
  *
  * @author parisek
  */
+
 @RestController
 @RequestMapping("/aum")
 public class RoleController {
